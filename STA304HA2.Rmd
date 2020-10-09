@@ -1,0 +1,162 @@
+---
+title: "October polling updates in Newfoudland and Labrador for liberal party"
+author: "Xinyu Wang"
+date: "08/10/2020"
+output:
+  pdf_document: default
+---
+#data
+```{r}
+#read data
+data <- read.csv("A2data.csv")
+```
+```{r}
+#separate data by strata
+dataAva <- data$Politic.Party[which(data$Region == "Avalon")]
+dataBbt <- data$Politic.Party[which(data$Region == "BBT")]
+dataBcn <- data$Politic.Party[which(data$Region == "BCN")]
+dataLabrador <- data$Politic.Party[which(data$Region == "Labrador")]
+dataLrm <- data$Politic.Party[which(data$Region == "LRM")]
+dataSje <- data$Politic.Party[which(data$Region == "SJE")]
+dataSjsmp <- data$Politic.Party[which(data$Region == "SJSMP")]
+```
+
+```{r}
+#calculate the mean, sd, var for Ava
+t <- 0
+for (i in 1:210) {
+  if (dataAva[i] == "Liberal") {
+    t <- t + 1
+  }
+}
+meanAva <- t / 210
+vaAva <- ((1 - meanAva)^2 * t + (0 - meanAva)^2 * (210 - t)) / (210 -1)
+sdAva <- sqrt(vaAva)
+meanAva
+vaAva
+sdAva
+```
+
+```{r}
+#calculate the mean, sd, var for Bbt
+t <- 0
+for (i in 1:260) {
+  if (dataBbt[i] == "Liberal") {
+    t <- t + 1
+  }
+}
+meanBbt <- t / 260
+vaBbt <- ((1 - meanBbt)^2 * t + (0 - meanBbt)^2 * (260 - t)) / (260 -1)
+sdBbt <- sqrt(vaBbt)
+meanBbt
+vaBbt
+sdBbt
+```
+
+```{r}
+#calculate the mean, sd, var for Bcn
+t <- 0
+for (i in 1:230) {
+  if (dataBcn[i] == "Liberal") {
+    t <- t + 1
+  }
+}
+meanBcn <- t / 230
+vaBcn <- ((1 - meanBcn)^2 * t + (0 - meanBcn)^2 * (230 - t)) / (230 -1)
+sdBcn <- sqrt(vaBcn)
+meanBcn
+vaBcn
+sdBcn
+```
+
+```{r}
+#calculate the mean, sd, var for Labrador
+t <- 0
+for (i in 1:90) {
+  if (dataLabrador[i] == "Liberal") {
+    t <- t + 1
+  }
+}
+meanLabrador <- t / 90
+vaLabrador <- ((1 - meanLabrador)^2 * t + (0 - meanLabrador)^2 * (90 - t)) / (90 -1)
+sdLabrador <- sqrt(vaLabrador)
+meanLabrador
+vaLabrador
+sdLabrador
+```
+
+```{r}
+#calculate the mean, sd, var for Lrm
+t <- 0
+for (i in 1:250) {
+  if (dataLrm[i] == "Liberal") {
+    t <- t + 1
+  }
+}
+meanLrm <- t / 250
+vaLrm <- ((1 - meanLrm)^2 * t + (0 - meanLrm)^2 * (250 - t)) / (250 -1)
+sdLrm <- sqrt(vaLrm)
+meanLrm
+vaLrm
+sdLrm
+```
+
+```{r}
+#calculate the mean, sd, var for Sje
+t <- 0
+for (i in 1:180) {
+  if (dataSje[i] == "Liberal") {
+    t <- t + 1
+  }
+}
+meanSje <- t / 180
+vaSje <- ((1 - meanSje)^2 * t + (0 - meanSje)^2 * (180 - t)) / (180 -1)
+sdSje <- sqrt(vaSje)
+meanSje
+vaSje
+sdSje
+```
+
+```{r}
+#calculate the mean, sd, var for Sjsmp
+t <- 0
+for (i in 1:180) {
+  if (dataSjsmp[i] == "Liberal") {
+    t <- t + 1
+  }
+}
+meanSjsmp <- t / 180
+vaSjsmp <- ((1 - meanSjsmp)^2 * t + (0 - meanSjsmp)^2 * (180 - t)) / (180 -1)
+sdSjsmp <- sqrt(vaSjsmp)
+meanSjsmp
+vaSjsmp
+sdSjsmp
+```
+```{r}
+#calculate the mean, sd, var for all data by strata
+meant <- (1 / 56000) * (meanAva * 8400 + meanBbt * 10400 + meanBcn * 9200 + 
+                         meanLabrador * 3600 + meanLrm * 10000 + meanSje * 7200 + meanSjsmp * 7200)
+vart <- (((8400^2)*((8400 - 210)/8400)*(sdAva/210)) + ((10400^2)*((10400 - 260)/10400)*(sdBbt/260)) + 
+           ((9200^2)*((9200 - 230)/9200)*(sdBcn/230)) + ((3600^2)*((3600 - 90)/3600)*(sdLabrador/90))
+         + ((10000^2)*((10000 - 250)/10000)*(sdLrm/250)) + ((7200^2)*((7200 - 180)/7200)*(sdSje/180)) + 
+           ((7200^2)*((7200 - 180)/7200)*(sdSjsmp/180))) / (56000 ^ 2)
+sdt <- sqrt(vart)
+meant
+vart
+sdt
+```
+```{r}
+#calculate the mean, sd, var for all data
+t <- 0
+for (i in 1:1400) {
+  if (data$Politic.Party[i] == "Liberal") {
+    t <- t + 1
+  }
+}
+meantn <- t / 1400
+vatn<- ((1 - meantn)^2 * t + (0 - meantn)^2 * (1400 - t)) / (1400 -1)
+sdtn <- sqrt(vatn)
+meantn
+vatn
+sdtn
+```
